@@ -1,0 +1,218 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mnist-training-867b489566-2hc4w
+  generateName: mnist-training-867b489566-
+  namespace: default
+  uid: adf5f9a6-af26-4ed3-aca2-6d7923b7b657
+  resourceVersion: '95343'
+  creationTimestamp: '2022-11-27T21:18:54Z'
+  labels:
+    k8s-app: mnist-training
+    pod-template-hash: 867b489566
+  annotations:
+    cni.projectcalico.org/containerID: ab387ac6f5f04db6b7870b71ea284cc86e6eecffe2519ab7da00767783d6abd1
+    cni.projectcalico.org/podIP: 172.17.42.135/32
+    cni.projectcalico.org/podIPs: 172.17.42.135/32
+    kubernetes.io/psp: ibm-privileged-psp
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: mnist-training-867b489566
+      uid: 8f30779c-0de7-4a8b-a136-43ad8523ef36
+      controller: true
+      blockOwnerDeletion: true
+  managedFields:
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-27T21:18:54Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:k8s-app: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"8f30779c-0de7-4a8b-a136-43ad8523ef36"}: {}
+        f:spec:
+          f:containers:
+            k:{"name":"mnist-training"}:
+              .: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:resources: {}
+              f:securityContext:
+                .: {}
+                f:privileged: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext: {}
+          f:terminationGracePeriodSeconds: {}
+    - manager: calico
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-27T21:18:55Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:cni.projectcalico.org/containerID: {}
+            f:cni.projectcalico.org/podIP: {}
+            f:cni.projectcalico.org/podIPs: {}
+      subresource: status
+    - manager: kubelet
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-28T22:42:05Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"172.17.42.135"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      subresource: status
+spec:
+  volumes:
+    - name: kube-api-access-z2565
+      projected:
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+                - key: ca.crt
+                  path: ca.crt
+          - downwardAPI:
+              items:
+                - path: namespace
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+        defaultMode: 420
+  containers:
+    - name: mnist-training
+      image: waynejinweizhu/mnist
+      resources: {}
+      volumeMounts:
+        - name: kube-api-access-z2565
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: Always
+      securityContext:
+        privileged: false
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  nodeName: 10.241.0.6
+  securityContext: {}
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 600
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 600
+  priority: 0
+  enableServiceLinks: true
+  preemptionPolicy: PreemptLowerPriority
+status:
+  phase: Running
+  conditions:
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-27T21:18:54Z'
+    - type: Ready
+      status: 'False'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-28T22:42:05Z'
+      reason: ContainersNotReady
+      message: 'containers with unready status: [mnist-training]'
+    - type: ContainersReady
+      status: 'False'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-28T22:42:05Z'
+      reason: ContainersNotReady
+      message: 'containers with unready status: [mnist-training]'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-27T21:18:54Z'
+  hostIP: 10.241.0.6
+  podIP: 172.17.42.135
+  podIPs:
+    - ip: 172.17.42.135
+  startTime: '2022-11-27T21:18:54Z'
+  containerStatuses:
+    - name: mnist-training
+      state:
+        waiting:
+          reason: CrashLoopBackOff
+          message: >-
+            back-off 5m0s restarting failed container=mnist-training
+            pod=mnist-training-867b489566-2hc4w_default(adf5f9a6-af26-4ed3-aca2-6d7923b7b657)
+      lastState:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2022-11-28T22:40:16Z'
+          finishedAt: '2022-11-28T22:42:04Z'
+          containerID: >-
+            containerd://8ab1d57cc399584cf6bbb17d960e67e532ff5ad493a8f7284e4ab69fff760bdb
+      ready: false
+      restartCount: 223
+      image: docker.io/waynejinweizhu/mnist:latest
+      imageID: >-
+        docker.io/waynejinweizhu/mnist@sha256:b8979d7db30aa5b0258a7dcdcab90db5766216ac220ef0781e38fef6fda1d6c8
+      containerID: >-
+        containerd://8ab1d57cc399584cf6bbb17d960e67e532ff5ad493a8f7284e4ab69fff760bdb
+      started: false
+  qosClass: BestEffort

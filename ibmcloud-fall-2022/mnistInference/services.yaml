@@ -1,0 +1,76 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mnistinferenceproject
+  namespace: default
+  uid: 8bb3eb5b-db1b-44b8-9c24-5b60b8eb34f0
+  resourceVersion: '91623'
+  creationTimestamp: '2022-11-28T21:41:22Z'
+  labels:
+    k8s-app: mnistinferenceproject
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  managedFields:
+    - manager: dashboard
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-28T21:41:22Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:k8s-app: {}
+        f:spec:
+          f:allocateLoadBalancerNodePorts: {}
+          f:externalTrafficPolicy: {}
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8002,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+    - manager: ibm-cloud-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-28T21:41:45Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"service.kubernetes.io/load-balancer-cleanup": {}
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      subresource: status
+spec:
+  ports:
+    - name: tcp-8002-8002-6ljxx
+      protocol: TCP
+      port: 8002
+      targetPort: 8002
+      nodePort: 31137
+  selector:
+    k8s-app: mnistinferenceproject
+  clusterIP: 172.21.144.86
+  clusterIPs:
+    - 172.21.144.86
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster
+status:
+  loadBalancer:
+    ingress:
+      - hostname: 8c1546b8-us-east.lb.appdomain.cloud
